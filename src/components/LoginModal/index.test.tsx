@@ -1,10 +1,8 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import LoginModal from "./index";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useProfile } from "../../hooks/useProfile";
-import { a, s } from "framer-motion/client";
 
 jest.mock("../../hooks/useProfile", () => ({
 	useProfile: jest.fn(),

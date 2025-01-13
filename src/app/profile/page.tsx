@@ -1,6 +1,5 @@
 "use client";
 
-import type React from "react";
 import { useProfile } from "@/hooks/useProfile";
 import ProfilePageUI from "@/components/ProfilePage";
 
