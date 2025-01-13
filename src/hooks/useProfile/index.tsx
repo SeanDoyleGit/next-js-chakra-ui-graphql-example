@@ -48,5 +48,5 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
 export const useProfile = () => {
 	const { profile, login, logout, isLoading } = useContext(ProfileContext);
 
-	return { isLoggedIn: !!profile, isLoading, profile, login, logout };
+	return { isLoggedIn: !!profile, isLoading, profile, login, logout, updateProfile: login };
 };

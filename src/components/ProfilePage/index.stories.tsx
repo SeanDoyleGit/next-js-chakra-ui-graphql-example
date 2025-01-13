@@ -19,10 +19,13 @@ export const Unauthenticated: Story = {};
 
 export const Authenticated: Story = {
 	args: {
-		username: "John Doe",
+		username: "Sean Doyle",
 		jobTitle: "Software Engineer",
 		onLogout: () => {
 			console.log("User logged out");
+		},
+		onUpdateProfile: () => {
+			console.log("User profile updated");
 		},
 	},
 };
