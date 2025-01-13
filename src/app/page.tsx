@@ -1,9 +1,9 @@
 "use client";
-import { useColorMode } from "@chakra-ui/react";
 import HomePageUI from "@/components/HomePage";
+import { useColorMode } from "@chakra-ui/react";
 
 export default function HomePage() {
-	const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
-	return <HomePageUI colorMode={colorMode} toggleColorMode={toggleColorMode} />;
+  return <HomePageUI colorMode={colorMode} toggleColorMode={toggleColorMode} />;
 }
