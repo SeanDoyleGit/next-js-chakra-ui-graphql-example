@@ -1,53 +1,50 @@
-import { ChakraProvider, Flex, IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
-import * as React from "react";
+import { ChakraProvider, Flex, IconButton, theme as defaultTheme, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import type { Decorator } from "@storybook/react";
+import { useEffect } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import theme from "../src/theme";
 
-export const globalTypes = {
-  direction: {
-    name: "Direction",
-    description: "Direction for layout",
-    defaultValue: "LTR",
-    toolbar: {
-      icon: "globe",
-      items: ["LTR", "RTL"],
-    },
-  },
+const ColorMode = ({ colorMode }: { colorMode: string }) => {
+  const { setColorMode } = useColorMode();
+
+  useEffect(() => {
+    setColorMode(colorMode);
+  }, [colorMode, setColorMode]);
+
+  return null;
 };
 
-const ColorModeToggleBar = () => {
+export const withColorModeToggleBar: Decorator = (Story) => {
   const { toggleColorMode } = useColorMode();
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
   const nextMode = useColorModeValue("dark", "light");
 
   return (
-    <Flex justify="flex-start" mb={4}>
-      <IconButton
-        size="md"
-        fontSize="lg"
-        aria-label={`Switch to ${nextMode} mode`}
-        variant="ghost"
-        color="current"
-        marginLeft="2"
-        onClick={toggleColorMode}
-        icon={<SwitchIcon />}
-      />
-    </Flex>
+    <>
+      <Flex position="fixed" zIndex={defaultTheme.zIndices.modal + 1} justify="flex-start" mb={4}>
+        <IconButton
+          size="md"
+          fontSize="lg"
+          aria-label={`Switch to ${nextMode} mode`}
+          variant="ghost"
+          color="current"
+          marginLeft="2"
+          onClick={toggleColorMode}
+          icon={<SwitchIcon />}
+        />
+      </Flex>
+      <Story />
+    </>
   );
 };
 
-const withChakra = (StoryFn, context) => {
-  const { direction } = context.globals;
-  const dir = direction.toLowerCase();
-
-  React.useEffect(() => {
-    document.documentElement.dir = dir;
-  }, [dir]);
+const withChakra: Decorator = (StoryFn, context) => {
+  const { colorMode } = context.globals;
 
   return (
     <ChakraProvider theme={theme}>
-      <div dir={dir} id="story-wrapper" style={{ minHeight: "100vh" }}>
-        <ColorModeToggleBar />
+      <div id="story-wrapper" style={{ minHeight: "100vh" }}>
+        <ColorMode colorMode={colorMode} />
         <StoryFn />
       </div>
     </ChakraProvider>
@@ -55,3 +52,18 @@ const withChakra = (StoryFn, context) => {
 };
 
 export const decorators = [withChakra];
+
+export const globalTypes = {
+  colorMode: {
+    name: "Color Mode",
+    description: "Global color mode for components",
+    defaultValue: "light",
+    toolbar: {
+      icon: "moon",
+      items: [
+        { value: "light", title: "Light Mode" },
+        { value: "dark", title: "Dark Mode" },
+      ],
+    },
+  },
+};

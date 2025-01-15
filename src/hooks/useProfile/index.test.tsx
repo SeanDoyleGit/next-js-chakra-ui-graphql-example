@@ -21,7 +21,8 @@ describe("useProfile", () => {
 
     const { result } = renderHook(() => useProfile(), { wrapper });
 
-    expect(result.current.profile).toEqual(profile);
+    expect(result.current.username).toEqual(profile.username);
+    expect(result.current.jobTitle).toEqual(profile.jobTitle);
   });
 
   it("should login and save profile to local storage", () => {
@@ -33,7 +34,8 @@ describe("useProfile", () => {
       result.current.login(newProfile);
     });
 
-    expect(result.current.profile).toEqual(newProfile);
+    expect(result.current.username).toEqual(newProfile.username);
+    expect(result.current.jobTitle).toEqual(newProfile.jobTitle);
     expect(localStorage.getItem("profile")).toEqual(JSON.stringify(newProfile));
   });
 
@@ -47,7 +49,8 @@ describe("useProfile", () => {
       result.current.logout();
     });
 
-    expect(result.current.profile).toBeNull();
+    expect(result.current.username).toBeNull();
+    expect(result.current.jobTitle).toBeNull();
     expect(localStorage.getItem("profile")).toBeNull();
   });
 });

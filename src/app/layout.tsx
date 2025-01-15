@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import "./globals.css";
 import { Providers } from "@/app/providers";
-import { Box } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
 
 export const metadata = {
   title: "My App",
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <Providers>
-          <Box h="100vh">{children}</Box>
+          <Layout>{children}</Layout>
         </Providers>
       </body>
     </html>

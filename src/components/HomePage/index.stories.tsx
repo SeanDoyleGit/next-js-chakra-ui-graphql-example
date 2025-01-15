@@ -1,13 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { withColorModeToggleBar } from "../../../.storybook/preview";
 
 import HomePage from "./index";
 const meta: Meta<typeof HomePage> = {
   component: HomePage,
-  decorators: [
-    (Story) => {
-      return <Story />;
-    },
-  ],
+  decorators: [withColorModeToggleBar],
 };
 
 export default meta;

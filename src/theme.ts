@@ -21,7 +21,18 @@ const components = {
                 bg: mode("gray.500", "gray.400")(props),
               },
             }
-          : {};
+          : props.colorScheme === "light"
+            ? {
+                bg: "gray.200",
+                color: "gray.800",
+                _hover: {
+                  bg: "gray.300",
+                },
+                _active: {
+                  bg: "gray.400",
+                },
+              }
+            : {};
       },
     },
     defaultProps: {
@@ -30,6 +41,11 @@ const components = {
   },
 };
 
-const theme = extendTheme({ config, components });
+const sizes = {
+  "header-height": "5rem",
+  "footer-height": "10rem",
+};
+
+const theme = extendTheme({ config, components, sizes, space: sizes });
 
 export default theme;

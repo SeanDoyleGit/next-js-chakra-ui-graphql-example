@@ -73,7 +73,7 @@ describe("LoginModal", () => {
     expect(localStorage.getItem("profile")).toBeNull();
   });
 
-  it("should save the username and job title to local storage when the login button is clicked", () => {
+  it("should save the username and job title to local storage when the login button is clicked", async () => {
     renderComponent();
     const usernameInput = screen.getByLabelText("Username", { exact: false });
     const jobTitleInput = screen.getByLabelText("Job Title", { exact: false });
@@ -83,14 +83,13 @@ describe("LoginModal", () => {
     expect(login).toHaveBeenCalledWith({ username: "testuser", jobTitle: "testjob" });
   });
 
-  it("should save the username and job title to local storage when enter it pressed", () => {
+  it("should save the username and job title to local storage when enter it pressed", async () => {
     renderComponent();
     const usernameInput = screen.getByLabelText("Username", { exact: false });
     const jobTitleInput = screen.getByLabelText("Job Title", { exact: false });
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
     fireEvent.change(jobTitleInput, { target: { value: "testjob" } });
     fireEvent.submit(jobTitleInput);
-
     expect(login).toHaveBeenCalledWith({ username: "testuser", jobTitle: "testjob" });
   });
 });

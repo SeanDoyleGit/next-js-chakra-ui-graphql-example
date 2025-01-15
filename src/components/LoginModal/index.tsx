@@ -30,6 +30,8 @@ export const LoginModalUI = ({ isOpen, onLogin }: LoginModalUIProps) => {
     }
 
     onLogin({ username, jobTitle });
+    setUsername("");
+    setJobTitle("");
   };
 
   return (
