@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ProfileProvider, useProfile } from "./index";
 import "@testing-library/jest-dom";
 import { ChakraProvider } from "@chakra-ui/react";
+import { DEFAULT_AVATAR_URL, DEFAULT_COVER_URL } from "@/constants";
 
 describe("useProfile", () => {
   const wrapper = ({ children }: { children: ReactNode }) => (
@@ -28,7 +29,7 @@ describe("useProfile", () => {
   it("should login and save profile to local storage", () => {
     const { result } = renderHook(() => useProfile(), { wrapper });
 
-    const newProfile = { username: "newuser", jobTitle: "newjob" };
+    const newProfile = { username: "newuser", jobTitle: "newjob", avatarUrl: "newavatar", coverUrl: "newcover" };
 
     act(() => {
       result.current.login(newProfile);
@@ -37,6 +38,22 @@ describe("useProfile", () => {
     expect(result.current.username).toEqual(newProfile.username);
     expect(result.current.jobTitle).toEqual(newProfile.jobTitle);
     expect(localStorage.getItem("profile")).toEqual(JSON.stringify(newProfile));
+  });
+
+  it("should login and save profile with default cover and avatar to local storage", () => {
+    const { result } = renderHook(() => useProfile(), { wrapper });
+
+    const newProfile = { username: "newuser", jobTitle: "newjob" };
+
+    act(() => {
+      result.current.login(newProfile);
+    });
+
+    expect(result.current.username).toEqual(newProfile.username);
+    expect(result.current.jobTitle).toEqual(newProfile.jobTitle);
+    expect(localStorage.getItem("profile")).toEqual(
+      JSON.stringify({ ...newProfile, avatarUrl: DEFAULT_AVATAR_URL, coverUrl: DEFAULT_COVER_URL }),
+    );
   });
 
   it("should logout and remove profile from local storage", () => {

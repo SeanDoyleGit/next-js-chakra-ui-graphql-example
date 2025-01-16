@@ -12,7 +12,7 @@ describe("LoginModal", () => {
   let onLogout: jest.Mock;
   let onUpdateProfile: jest.Mock;
 
-  const renderComponent = () => {
+  const renderComponent = ({ isLoading = false, isLoggedIn = true } = {}) => {
     return render(
       <ChakraProvider>
         <ProfilePage
@@ -20,6 +20,8 @@ describe("LoginModal", () => {
           jobTitle={jobTitle}
           avatarUrl={avatarUrl}
           coverUrl={coverUrl}
+          isLoggedIn={isLoggedIn}
+          isLoading={isLoading}
           onLogout={onLogout}
           onUpdateProfile={onUpdateProfile}
         />
@@ -34,6 +36,18 @@ describe("LoginModal", () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it("should render loading state when loading", () => {
+    renderComponent({ isLoading: true });
+    expect(screen.getByText("Loading Username", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Loading Job Title", { exact: false })).toBeInTheDocument();
+  });
+
+  it("should render loading state when not logged in", () => {
+    renderComponent({ isLoggedIn: false });
+    expect(screen.getByText("Loading Username", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText("Loading Job Title", { exact: false })).toBeInTheDocument();
   });
 
   it("should render profile page with username and job title", () => {

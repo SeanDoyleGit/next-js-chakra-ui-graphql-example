@@ -1,4 +1,4 @@
-import { Avatar, Button, Flex, IconButton } from "@chakra-ui/react";
+import { Avatar, Button, Flex, IconButton, SkeletonCircle } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { RiHomeFill } from "react-icons/ri";
 
@@ -14,7 +14,7 @@ const Header = ({ username, avatarUrl }: HeaderProps) => {
       bg="gray.700"
       as="header"
       p={4}
-      position="fixed"
+      position="absolute"
       alignItems="center"
       justifyContent="space-between"
       top={0}
@@ -24,19 +24,13 @@ const Header = ({ username, avatarUrl }: HeaderProps) => {
       <NextLink href="/" passHref legacyBehavior>
         <IconButton variant="link" as="a" color="gray.100" aria-label="Home" size="lg" fontSize="30px" icon={<RiHomeFill />} />
       </NextLink>
-      {username ? (
+      <SkeletonCircle isLoaded={!!username && !!avatarUrl} fadeDuration={0} w={12} h={12}>
         <NextLink href="/profile" passHref legacyBehavior>
           <Button as="a" variant="link">
-            <Avatar size="md" name={username} src={avatarUrl ?? undefined} />
+            <Avatar size="md" name={username ?? "Loading"} src={avatarUrl ?? undefined} />
           </Button>
         </NextLink>
-      ) : (
-        <NextLink href="/login" passHref legacyBehavior>
-          <Button as="a" colorScheme="light" href="/login">
-            Login
-          </Button>
-        </NextLink>
-      )}
+      </SkeletonCircle>
     </Flex>
   );
 };

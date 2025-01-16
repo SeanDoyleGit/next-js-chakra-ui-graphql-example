@@ -18,6 +18,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    username: "Sean Doyle",
     avatarUrl: DEFAULT_AVATAR_URL,
+  },
+};
+
+export const Unauthenticated: Story = {
+  args: {
+    avatarUrl: "",
   },
 };

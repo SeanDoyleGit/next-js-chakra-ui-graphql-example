@@ -12,7 +12,7 @@ interface LayoutUIProps {
 
 export const LayoutUI = ({ username, avatarUrl, children }: LayoutUIProps) => {
   return (
-    <Box h="100vh" pt="header-height" pb="footer-height">
+    <Box minH="100vh" pt="header-height" pb="footer-height">
       <Header username={username} avatarUrl={avatarUrl} />
       <main>{children}</main>
       <Footer />

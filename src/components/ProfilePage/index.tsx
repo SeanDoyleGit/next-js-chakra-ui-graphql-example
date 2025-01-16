@@ -1,4 +1,19 @@
-import { Avatar, Box, Button, Card, Center, Flex, FormControl, FormLabel, Heading, Image, Input, Stack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Center,
+  FormControl,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
+  Skeleton,
+  SkeletonCircle,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { type FormEvent, useState } from "react";
 
 interface ProfilePageProps {
@@ -6,11 +21,22 @@ interface ProfilePageProps {
   jobTitle: string | null;
   avatarUrl: string | null;
   coverUrl: string | null;
+  isLoading: boolean;
+  isLoggedIn: boolean;
   onLogout: () => void;
   onUpdateProfile: (data: { username: string; jobTitle: string }) => void;
 }
 
-export default function ProfilePage({ username, jobTitle, avatarUrl, coverUrl, onLogout, onUpdateProfile }: ProfilePageProps) {
+export default function ProfilePage({
+  username,
+  jobTitle,
+  avatarUrl,
+  coverUrl,
+  isLoggedIn,
+  isLoading,
+  onLogout,
+  onUpdateProfile,
+}: ProfilePageProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleProfileEditSubmit = (data: { username: string; jobTitle: string }) => {
@@ -18,23 +44,25 @@ export default function ProfilePage({ username, jobTitle, avatarUrl, coverUrl, o
     setIsEditing(false);
   };
 
-  if (!username || !jobTitle || !avatarUrl || !coverUrl) {
-    return <Center h="100vh">Please login to view your profile</Center>;
-  }
+  const isLoaded = !isLoading && isLoggedIn;
 
   return (
     <Center py={6}>
       <Card maxWidth={400} w="full" boxShadow="2xl" rounded="md" overflow="hidden">
-        <Image h={"120px"} w={"full"} src={coverUrl} objectFit="cover" alt="#" />
-        <Flex justify={"center"} mt={-12}>
-          <Avatar
-            size={"xl"}
-            src={avatarUrl}
-            css={{
-              border: "2px solid white",
-            }}
-          />
-        </Flex>
+        <Skeleton isLoaded={isLoaded} fadeDuration={0} h="120px" w="full" startColor="gray.400" endColor="gray.400">
+          <Image h={"120px"} w={"full"} src={coverUrl ?? undefined} objectFit="cover" alt="#" />
+        </Skeleton>
+        <Center>
+          <SkeletonCircle isLoaded={isLoaded} fadeDuration={0} w={24} h={24} mt={-12} startColor="gray.400" endColor="gray.400">
+            <Avatar
+              size={"xl"}
+              src={avatarUrl ?? undefined}
+              css={{
+                border: "2px solid white",
+              }}
+            />
+          </SkeletonCircle>
+        </Center>
 
         {isEditing ? (
           <Box p={6}>
@@ -42,17 +70,21 @@ export default function ProfilePage({ username, jobTitle, avatarUrl, coverUrl, o
           </Box>
         ) : (
           <Box p={6}>
-            <Stack spacing={0} align={"center"} mb={5}>
-              <Heading fontSize={"2xl"} fontWeight={500} fontFamily={"body"}>
-                {username}
-              </Heading>
-              <Text color={"gray.500"}>{jobTitle}</Text>
+            <Stack spacing={1} align={"center"} mb={5}>
+              <Skeleton isLoaded={isLoaded} fadeDuration={0}>
+                <Heading fontSize={"2xl"} fontWeight={500} fontFamily={"body"}>
+                  {isLoaded ? username : "Loading Username"}
+                </Heading>
+              </Skeleton>
+              <Skeleton isLoaded={isLoaded} fadeDuration={0}>
+                <Text color={"gray.500"}>{isLoaded ? jobTitle : "Loading Job Title"}</Text>
+              </Skeleton>
             </Stack>
 
-            <Button mt={8} variant="outline" w="full" onClick={() => setIsEditing(true)}>
+            <Button isLoading={!isLoaded} mt={8} variant="outline" w="full" onClick={() => setIsEditing(true)}>
               Edit Profile
             </Button>
-            <Button w="full" mt={2} rounded="md" onClick={onLogout}>
+            <Button isLoading={!isLoaded} w="full" mt={2} rounded="md" onClick={onLogout}>
               Logout
             </Button>
           </Box>

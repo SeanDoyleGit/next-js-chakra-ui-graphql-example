@@ -55,12 +55,21 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (data: Profile) => {
-    const { username, jobTitle, avatarUrl, coverUrl } = data;
-    setUsername(username);
-    setJobTitle(jobTitle);
-    if (avatarUrl) setAvatarUrl(avatarUrl);
-    if (coverUrl) setCoverUrl(coverUrl);
-    localStorage.setItem("profile", JSON.stringify(data));
+    const result = {
+      username: data.username,
+      jobTitle: data.jobTitle,
+      avatarUrl: data.avatarUrl ?? DEFAULT_AVATAR_URL,
+      coverUrl: data.coverUrl ?? DEFAULT_COVER_URL,
+    };
+
+    setUsername(result.username);
+    setJobTitle(result.jobTitle);
+    setAvatarUrl(result.avatarUrl);
+    setCoverUrl(result.coverUrl);
+    localStorage.setItem(
+      "profile",
+      JSON.stringify({ username: result.username, jobTitle: result.jobTitle, avatarUrl: result.avatarUrl, coverUrl: result.coverUrl }),
+    );
   };
 
   const logout = () => {
