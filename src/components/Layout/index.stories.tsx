@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { DEFAULT_AVATAR_URL } from "@/constants";
 import { Center, Text } from "@chakra-ui/react";
-import { LayoutUI } from "./index";
+import Layout from "./index";
 
-const meta: Meta<typeof LayoutUI> = {
-  component: LayoutUI,
+const meta: Meta<typeof Layout> = {
+  component: Layout,
   decorators: [
     (Story) => {
       return <Story />;
@@ -61,16 +60,8 @@ const children = (
   </Center>
 );
 
-export const Unauthenticated: Story = {
+export const Default: Story = {
   args: {
-    children,
-  },
-};
-
-export const Authenticated: Story = {
-  args: {
-    username: "Sean Doyle",
-    avatarUrl: DEFAULT_AVATAR_URL,
     children,
   },
 };

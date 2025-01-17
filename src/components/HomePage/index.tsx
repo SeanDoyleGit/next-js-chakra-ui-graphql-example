@@ -15,6 +15,7 @@ export default function HomePage({ colorMode, toggleColorMode }: HomePageProps) 
       <Text fontSize="lg" mb={6}>
         This is a simple home page demo using Chakra UI components.
       </Text>
+
       <Button onClick={toggleColorMode}>Toggle {colorMode === "light" ? "Dark" : "Light"}</Button>
       <NextLink href="/profile" passHref legacyBehavior>
         <Button as="a" colorScheme="blue">

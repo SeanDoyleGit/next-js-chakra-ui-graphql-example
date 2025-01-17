@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { withColorModeToggleBar } from "../../../.storybook/preview";
-import { LoginModalUI } from "./index";
+import LoginModalUI from "./ui";
 
 const meta: Meta<typeof LoginModalUI> = {
   component: LoginModalUI,

@@ -1,15 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { DEFAULT_AVATAR_URL } from "@/constants";
-import Header from "./index";
+import HeaderUI from "./ui";
 
-const meta: Meta<typeof Header> = {
-  component: Header,
+const meta: Meta<typeof HeaderUI> = {
+  component: HeaderUI,
   decorators: [
     (Story) => {
       return <Story />;
     },
   ],
+  args: {
+    colorMode: "light",
+    toggleColorMode: () => {},
+  },
 };
 
 export default meta;
