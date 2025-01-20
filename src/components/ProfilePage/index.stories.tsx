@@ -1,8 +1,8 @@
 import { DEFAULT_AVATAR_URL, DEFAULT_COVER_URL } from "@/constants";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ProfilePage from "./index";
 import { withColorModeToggleBar } from "../../../.storybook/preview";
+import ProfilePage from "./index";
 
 const meta: Meta<typeof ProfilePage> = {
   component: ProfilePage,

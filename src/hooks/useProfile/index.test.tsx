@@ -2,8 +2,8 @@ import { act, renderHook } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { ProfileProvider, useProfile } from "./index";
 import "@testing-library/jest-dom";
-import { ChakraProvider } from "@chakra-ui/react";
 import { DEFAULT_AVATAR_URL, DEFAULT_COVER_URL } from "@/constants";
+import { ChakraProvider } from "@chakra-ui/react";
 
 describe("useProfile", () => {
   const wrapper = ({ children }: { children: ReactNode }) => (

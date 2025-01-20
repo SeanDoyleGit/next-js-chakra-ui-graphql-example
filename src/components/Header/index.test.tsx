@@ -1,9 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { DEFAULT_AVATAR_URL } from "@/constants";
 import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import { useProfile } from "../../hooks/useProfile";
 import Header from "./index";
-import { DEFAULT_AVATAR_URL } from "@/constants";
 
 jest.mock("@chakra-ui/react", () => ({
   ...jest.requireActual("@chakra-ui/react"),

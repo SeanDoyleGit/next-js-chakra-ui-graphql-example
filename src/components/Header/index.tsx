@@ -1,6 +1,6 @@
+import { useProfile } from "@/hooks/useProfile";
 import { useColorMode } from "@chakra-ui/react";
 import HeaderUI from "./ui";
-import { useProfile } from "@/hooks/useProfile";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();

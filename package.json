@@ -10,9 +10,11 @@
     "lint-fix": "biome check --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "codegen": "graphql-codegen",
     "test": "jest"
   },
   "dependencies": {
+    "@apollo/client": "^3.12.6",
     "@chakra-ui/react": "^2.10.4",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
@@ -25,6 +27,9 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@chromatic-com/storybook": "^3.2.2",
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/client-preset": "^4.5.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@storybook/addon-essentials": "^8.4.5",
     "@storybook/addon-interactions": "^8.4.5",
     "@storybook/addon-onboarding": "^8.4.5",
@@ -39,13 +44,15 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv": "^16.4.7",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "eslint-plugin-storybook": "^0.11.1",
+    "graphql": "^16.10.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "storybook": "^8.4.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   }
 }
