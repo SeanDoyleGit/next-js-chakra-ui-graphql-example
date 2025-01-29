@@ -21,7 +21,7 @@ export const withColorModeToggleBar: Decorator = (Story) => {
 
   return (
     <>
-      <Flex position="fixed" zIndex={defaultTheme.zIndices.modal + 1} justify="flex-start" mb={4}>
+      <Flex position="relative" zIndex={defaultTheme.zIndices.modal + 1} justify="flex-start" mb={4}>
         <IconButton
           size="md"
           fontSize="lg"

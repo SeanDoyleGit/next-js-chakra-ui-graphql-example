@@ -32,7 +32,7 @@ const HeaderUI = ({ username, avatarUrl, toggleColorMode, colorMode }: HeaderPro
         <IconButton
           variant="ghost"
           fontSize={20}
-          icon={colorMode === "dark" ? <FaMoon /> : <FaSun />}
+          icon={colorMode === "dark" ? <FaSun /> : <FaMoon />}
           onClick={toggleColorMode}
           color="gray.100"
           aria-label={colorMode === "dark" ? "Toggle color mode to light" : "Toggle color mode to dark"}
@@ -40,7 +40,7 @@ const HeaderUI = ({ username, avatarUrl, toggleColorMode, colorMode }: HeaderPro
         <SkeletonCircle isLoaded={!!username && !!avatarUrl} fadeDuration={0} w={12} h={12}>
           <NextLink href="/profile" passHref legacyBehavior>
             <Button as="a" variant="link">
-              <Avatar size="md" name={username ? `${username} avatar image` : "Loading"} src={avatarUrl ?? undefined} />
+              <Avatar loading="lazy" size="md" name={username ? `${username} avatar image` : "Loading"} src={avatarUrl ?? ""} />
             </Button>
           </NextLink>
         </SkeletonCircle>
