@@ -2,11 +2,8 @@
 
 import CharacterList from "@/components/CharacterList";
 import Pagination from "@/components/Pagination";
-import type { Character, GetCharactersQuery } from "@/gql/__generated__/graphql";
-import { GET_CHARACTERS } from "@/gql/queries/getCharacters";
-import { useQuery } from "@apollo/client";
+import { useCharacters } from "@/hooks/useCharacters";
 import { Center, Heading, Stack } from "@chakra-ui/react";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface CharactersPageProps {
@@ -15,12 +12,8 @@ interface CharactersPageProps {
 
 export default function CharactersPage({ searchParams }: CharactersPageProps) {
   const [currentPage, setCurrentPage] = useState(Number.parseInt(searchParams.page ?? "0"));
-  const { push } = useRouter();
-  const pathname = usePathname();
 
-  const { loading, data } = useQuery<GetCharactersQuery>(GET_CHARACTERS, { variables: { page: currentPage }, skip: currentPage < 1 });
-
-  console.log("CharactersPageProps", searchParams, currentPage, pathname, loading, data?.characters);
+  const { isLoading, characters, info } = useCharacters({ page: currentPage });
 
   const updatePage = (page: number) => {
     setCurrentPage(page);
@@ -33,10 +26,6 @@ export default function CharactersPage({ searchParams }: CharactersPageProps) {
       window.history.pushState(null, "", "?page=1");
     }
   }, [currentPage]);
-
-  const isLoading = loading || !data?.characters?.results;
-  const characters = (data?.characters?.results || []).filter((character) => character !== null) as Character[];
-  const info = data?.characters?.info || {};
 
   return (
     <Center py={20}>
