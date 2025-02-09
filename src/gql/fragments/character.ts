@@ -1,6 +1,8 @@
 import { gql } from "@apollo/client";
+import { FRAGMENT_EPISODE } from "./episode";
+import { FRAGMENT_LOCATION } from "./location";
 
-export const FRAGMENT_CHARACTER = gql(`
+export const FRAGMENT_CHARACTER = gql`
   fragment Character on Character {
     id
     name
@@ -20,4 +22,7 @@ export const FRAGMENT_CHARACTER = gql(`
       ...Episode
     }
   }
-`);
+
+  ${FRAGMENT_LOCATION}
+  ${FRAGMENT_EPISODE}
+`;

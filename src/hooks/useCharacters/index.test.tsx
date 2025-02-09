@@ -1,7 +1,7 @@
-import { renderHook } from "@testing-library/react";
-import { useCharacters } from "./index";
 import { useQuery } from "@apollo/client";
+import { renderHook } from "@testing-library/react";
 import { useProfile } from "../useProfile";
+import { useCharacters } from "./index";
 import { characters } from "./sample";
 
 jest.mock("@apollo/client", () => ({

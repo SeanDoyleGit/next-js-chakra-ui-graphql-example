@@ -13,6 +13,7 @@ export interface CharacterListProps {
 interface DummyCharacter {
   id: string;
   image: string;
+  name: string;
 }
 
 const fadeIn = keyframes`
@@ -28,6 +29,7 @@ const CharacterList = ({ isLoading, characters, onCharacterClick }: CharacterLis
   const loadingCharacters: DummyCharacter[] = Array.from({ length: 9 }, (_, index) => ({
     id: index.toString(),
     image: "",
+    name: "",
   }));
 
   return (
@@ -46,7 +48,7 @@ const CharacterList = ({ isLoading, characters, onCharacterClick }: CharacterLis
             bg="gray.700"
             animation={`${fadeIn} 1s ease-in-out infinite alternate`}
           >
-            {isLoading ? null : <Image src={character.image ?? ""} alt="Picture of the author" fill />}
+            {isLoading ? null : <Image src={character.image ?? ""} alt={character.name ?? ""} fill />}
             <Box
               pos="absolute"
               top={0}

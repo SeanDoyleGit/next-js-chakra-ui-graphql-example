@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const FRAGMENT_EPISODE = gql(`
+export const FRAGMENT_EPISODE = gql`
   fragment Episode on Episode {
     id
     name
@@ -8,4 +8,4 @@ export const FRAGMENT_EPISODE = gql(`
     episode
     created
   }
-`);
+`;
