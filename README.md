@@ -1,8 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+This project uses [Chakra UI](https://chakra-ui.com/) for styling, [Apollo Client](https://www.apollographql.com/docs/react/) for graphql queries and [Storybook](https://storybook.js.org/) for component development.
+
+View the live vercel deployment here https://next-js-chakra-ui-graphql-example.vercel.app/
+
 ## Getting Started
 
-First, run the development server:
+Set up the graphql endpoint in the .env file
+
+This project currently uses `NEXT_PUBLIC_GRAPHQL_URL: https://rickandmortyapi.com/graphql`
+
+Run the development server:
 
 ```bash
 npm run dev

@@ -28,7 +28,6 @@ export default function CharactersPage({ searchParams }: CharactersPageProps) {
     }
   };
   useEffect(() => {
-    console.log("currentPage", currentPage);
     if (!currentPage || currentPage < 1) {
       setCurrentPage(1);
       window.history.pushState(null, "", "?page=1");
